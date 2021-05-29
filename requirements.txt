@@ -33,6 +33,7 @@ pycocotools>=2.0  # COCO mAP
 Flask
 gunicorn
 flask-cors
+waitress
 
 # logging
 google-cloud-logging

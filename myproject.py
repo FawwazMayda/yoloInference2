@@ -2,6 +2,7 @@ from flask.helpers import send_file
 from MLManager import MLManager
 from flask import Flask,request,jsonify
 from flask_cors import CORS
+from waitress import serve
 
 import os
 import logging
@@ -21,7 +22,7 @@ client.setup_logging()
 
 app = Flask(__name__)
 CORS(app)
-app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jpeg',".JPG",".JPEG",".PNG"]
+app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jpeg',".JPG",".JPEG"]
 model = MLManager("best.pt")
 
 # save the label and image path result
@@ -93,4 +94,5 @@ def getImageDetectionResult():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',debug=True)
+    #app.run() ##Replaced with below code to run it using waitress 
+   serve(app, host='0.0.0.0', port=80)
